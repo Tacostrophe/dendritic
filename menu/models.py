@@ -83,8 +83,10 @@ class Node(AbstractSlugFromName):
                 ancestor_list = [Relations(descendant=self, ancestor=grandpa)]
                 print(self.parent.ancestors)
                 for relations in self.parent.ancestors.all():
-                    ancestor_list.append(Relations(descendant=self,
-                                                   ancestor=relations.ancestor))
+                    ancestor_list.append(Relations(
+                        descendant=self,
+                        ancestor=relations.ancestor
+                    ))
                 print(f'{ancestor_list=}')
                 Relations.objects.bulk_create(ancestor_list)
         return data
