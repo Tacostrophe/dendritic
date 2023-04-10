@@ -1,5 +1,4 @@
 from django.shortcuts import render
-# from .models import Node, Menu, Relations
 
 
 def one_menu(request):
