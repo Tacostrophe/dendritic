@@ -54,9 +54,6 @@ class Node(AbstractSlugFromName):
     def __str__(self):
         return self.slug
 
-#     def get_absolute_url(self):
-#         return
-#
     def clean(self, *args, **kwargs):
         # validate self_menu == parent_menu
         if (self.parent):
@@ -90,8 +87,7 @@ class Node(AbstractSlugFromName):
                 print(f'{ancestor_list=}')
                 Relations.objects.bulk_create(ancestor_list)
         return data
-#
-#     def delete(self):
+
 
 
 class Relations(models.Model):
