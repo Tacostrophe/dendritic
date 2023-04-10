@@ -5,7 +5,7 @@
             {{ node.name }}
         </a>
         {% if node.subnodes|length %}
-            {% include "menu.html" with nodes=node.subnodes %}
+            {% include "core/menu.html" with nodes=node.subnodes %}
         {% endif %}
     {% endfor %}
 </ul>
