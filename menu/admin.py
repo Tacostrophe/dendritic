@@ -14,8 +14,11 @@ class MenuAdmin(admin.ModelAdmin):
 
 @admin.register(models.Node)
 class NodeAdmin(admin.ModelAdmin):
-    list_display = ['pk', 'menu', 'name', 'parent', 'slug',]
+    list_display = ['pk', 'menu', 'name', 'parent', 'slug', 'get_relatives']
     empty_value_display = EMPTY_VALUE_DISPLAY
+
+    def get_relatives(self, obj):
+        return [str(relatives) for relatives in obj.relatives.all()]
 
 
 # delete in final cut

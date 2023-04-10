@@ -42,7 +42,7 @@ class Node(AbstractSlugFromName):
     parent = models.ForeignKey(
         'self',
         on_delete=models.CASCADE,
-        related_name='child',
+        related_name='children',
         null=True,
         blank=True,
     )
