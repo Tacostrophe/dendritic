@@ -1,4 +1,4 @@
-# dendritic
+# dendritic :deciduous_tree:
 
 ### Описание
 **dendritic** - это проект реализация древовидного меню на Django.
