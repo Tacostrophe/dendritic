@@ -1,6 +1,11 @@
 <ul>
     {% for node in nodes %}
-    {% url 'one_menu' as the_url %}
-    <li> <a href="{{the_url}}?node={{node.slug}}">{{node.name}} </a></li>
+    <li>
+        <a href="{{ request.path }}?node={{ node.slug }}">
+            {{ node.name }}
+        </a>
+        {% if node.subnodes|length %}
+            {% include "menu.html" with nodes=node.subnodes %}
+        {% endif %}
     {% endfor %}
 </ul>
