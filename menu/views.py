@@ -10,7 +10,7 @@ def one_menu(request):
     return render(request, template, context)
 
 
-def several_menus(request, slug):
+def several_menus(request):
     template = 'tests/several_menu.html'
     title = 'Проверка нескольких меню'
     context = {
