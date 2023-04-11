@@ -10,16 +10,17 @@ register = template.Library()
 def draw_menu(context, menu_name):
     request = context.get('request')
     if (request):
-        slug = request.GET.get('node')
-    slug = (slug or '')
+        node_id = request.GET.get('node_id')
+    node_id = (node_id or 0)
     menu = {}
     nodes = models.Node.objects.filter(
         Q(parent__isnull=True) |
-        Q(parent__descendants__descendant__slug=slug) |
-        Q(parent__children__slug=slug) |
-        Q(parent__slug=slug),
+        Q(parent__descendants__descendant__id=node_id) |
+        Q(parent__children__id=node_id) |
+        Q(parent__id=node_id),
         menu__name=menu_name
     ).distinct()
+    print(nodes)
     children = {}
     result_node_list = []
     nodes_index = len(nodes) - 1

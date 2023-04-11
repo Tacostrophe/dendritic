@@ -1,37 +1,23 @@
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.template.defaultfilters import slugify
 from django.utils.translation import gettext as _
 
 
-class AbstractSlugFromName(models.Model):
+class Menu(models.Model):
     name = models.CharField(
         max_length=64,
         unique=True,
     )
-    slug = models.SlugField(
-        null=True,
-        blank=True,
-        unique=True,
-        editable=False,
-    )
 
-    class Meta:
-        abstract = True
-
-    def save(self, *args, **kwargs):
-        # creating new model => adding slug
-        if not self.slug:
-            self.slug = slugify(self.name)
-        return super(AbstractSlugFromName, self).save(*args, **kwargs)
-
-
-class Menu(AbstractSlugFromName):
     def __str__(self):
-        return f'Menu: {self.slug}'
+        return f'Menu: {self.name}'
 
 
-class Node(AbstractSlugFromName):
+class Node(models.Model):
+    name = models.CharField(
+        max_length=64,
+        unique=True,
+    )
     menu = models.ForeignKey(
         Menu,
         on_delete=models.CASCADE,
@@ -52,7 +38,7 @@ class Node(AbstractSlugFromName):
     )
 
     def __str__(self):
-        return self.slug
+        return self.name
 
     def clean(self, *args, **kwargs):
         # validate self_menu == parent_menu
@@ -87,7 +73,6 @@ class Node(AbstractSlugFromName):
                 print(f'{ancestor_list=}')
                 Relations.objects.bulk_create(ancestor_list)
         return data
-
 
 
 class Relations(models.Model):

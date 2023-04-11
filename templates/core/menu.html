@@ -1,7 +1,7 @@
 <ul>
     {% for node in nodes %}
     <li>
-        <a href="{{ request.path }}?node={{ node.slug }}">
+        <a href="{{ request.path }}?node_id={{ node.id }}">
             {{ node.name }}
         </a>
         {% if node.subnodes|length %}
